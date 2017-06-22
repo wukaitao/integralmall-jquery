@@ -1,0 +1,32 @@
+{
+  "name": "integralmall-jquery",
+  "version": "1.0.0",
+  "description": "integralmall by express & jquery .",
+  "keywords": "shop server",
+  "bugs": {
+    "email": "wukaitao2006@163.com"
+  },
+  "files": [
+    "build",
+    "client",
+    "package.json",
+    "README.md"
+  ],
+  "bin": "./path/to/program",
+  "main": "build/dev-server.js",
+  "scripts": {
+    "dev": "node build/dev-server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wukaitao/integralmall-jquery.git"
+  },
+  "author": "Nicky.Wu",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0",
+    "http-proxy-middleware": "^0.17.3",
+    "opn": "^4.0.2",
+    "request": "^2.81.0"
+  }
+}

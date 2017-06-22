@@ -1,0 +1,103 @@
+﻿<!doctype html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<title>积分商城</title>
+	<script type="text/javascript" src="../md5.min.js"></script>
+	<script type="text/javascript" src="../jquery.min.js"></script>
+	<script type="text/javascript">
+		//cookie操作
+		//写入cookie
+		window.setCookie = function(name, value){
+			var Days = 30;
+			var exp = new Date();
+			exp.setTime(exp.getTime() + Days*24*60*60*1000);
+			document.cookie = name + '='+ escape (value) + ';expires=' + exp.toGMTString();
+		};
+		//获取cookie
+		window.getCookie = function(name){
+			var arr,reg=new RegExp('(^| )'+name+'=([^;]*)(;|$)');
+			if(arr=document.cookie.match(reg)) return unescape(arr[2]);
+			else return null;
+		};
+		//删除cookie
+		window.delCookie = function(name){
+			var exp = new Date();
+			exp.setTime(exp.getTime() - 1);
+			var cval=getCookie(name);
+			if(cval!=null) document.cookie= name + '='+cval+';expires='+exp.toGMTString();
+		};
+	</script>
+	<style type="text/css">
+		body,html{
+			margin: 0px;
+			padding: 0px;
+			font-size: 14px;
+		}
+		.pageInfo{
+			line-height: 38px;
+			text-align: center;
+			font-size: 18px;
+			color: #f00;
+			background-color: #f0f0f0;
+		}
+		.btnArea{
+			line-height: 48px;
+			text-align: center;
+		}
+		.result{
+			margin: 10px 0px 0px;
+			padding: 10px;
+			font-size: 12px;
+			line-height: 20px;
+		}
+		.btn{
+			border-radius: 5px;
+			border-color: 1px solid #999;
+			background-color: #f0f0f0;
+			color: #333;
+			display: inline-block;
+			padding: 0px 15px;
+			line-height: 32px;
+			text-align: center;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<div class="pageInfo">页面</div>
+	<div class="btnArea">
+		<button type="button" class="btn">获取初始信息</button>
+	</div>
+	<div class="result"></div>
+</body>
+<script type="text/javascript">
+	$(function(){
+		$('.btn').on('click',function(){
+			setCookie('UID','1002802');
+			var param = {
+				action: 'MB'
+			};
+			$.ajax({
+				type: 'post',
+				data: {param: md5(JSON.stringify(param))},
+				url: '/shop/interface/initPageData',
+				timeout: 60000,
+				dataType: 'json',
+				async: true,
+				cache: true,
+				contentType: 'application/x-www-form-urlencoded',
+				beforeSend: function(){},
+				complete: function(){},
+				success: function(data){
+					console.log(data);
+				},
+				error: function(err){
+					console.log(err);
+				}
+			});
+		});
+	});
+</script>
+</html>
